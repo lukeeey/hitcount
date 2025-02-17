@@ -3,7 +3,7 @@ const URL_REGEX = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0
 let socketState = "loading";
 
 const handleSocket = () => {
-    const socket = new WebSocket("ws://hitcount.dev/socket");
+    const socket = new WebSocket("wss://hitcount.dev/socket");
     const realtimeLoading = document.getElementById("realtime-loading");
 
     socket.onopen = () => {

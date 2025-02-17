@@ -19,6 +19,7 @@ public class MySQLConnection {
         dataSource.setJdbcUrl("jdbc:mysql://localhost/hitcount");
         dataSource.setUsername("USERNAME");
         dataSource.setPassword("PASSWORD");
+        dataSource.setMaxLifetime(600000); // 10 minutes
     }
 
     public void logHit(String path, PathType pathType) {
