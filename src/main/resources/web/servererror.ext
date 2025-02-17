@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="luke@glitch.je">
+    <meta name="description" content="The simplest way to track the number of people viewing your GitHub projects!">
+
+    <title>Hit Counter</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        .create-btn {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -2px rgba(0, 0, 0, .1);
+            border: 1px solid blue;
+            margin-top: 20px;
+            transition: linear 0.2s;
+        }
+
+        .create-btn:hover {
+            box-shadow: rgba(95, 64, 250, 0.25) 0px 14px 28px, rgba(95, 64, 250, 0.25) 0px 10px 10px;
+            transition: linear 0.2s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header-section">
+        <h1 class="title">Server Error</h1>
+        <p class="subtitle">An unknown error has occurred, please try again later.</p>
+    </div>
+</body>
+
+</html>

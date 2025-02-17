@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="luke@glitch.je">
+    <meta name="description" content="The simplest way to track the number of people viewing your GitHub projects!">
+
+    <title>Hit Counter</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+    <link rel="stylesheet" href="/static/css/project.css">
+</head>
+
+<body>
+     <div class="navbar">
+        <a class="navbar-title" href="/">Create your own Hit Counter!</a>
+
+        <div class="donate-wrapper">
+            <iframe class="gh-sponsors" src="https://github.com/sponsors/lukeeey/button" title="Sponsor lukeeey" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
+            <a href="https://www.buymeacoffee.com/lukeeey" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;" ></a>
+        </div>
+    </div>
+    
+    <div class="main">
+        <h1 class="title">${path}</h1>
+        <p class="subtitle">Stats about ${path}!</p>
+
+        <div class="stats-wrapper">
+            <div class="stat">
+                <p class="stat-title">Total hits</p>
+                <p class="stat-value">${totalHits}</p>
+            </div>
+            <div class="stat">
+                <p class="stat-title">Hits this month</p>
+                <p class="stat-value">${hitsThisMonth}</p>
+            </div>
+            <div class="stat">
+                <p class="stat-title">Hits today</p>
+                <p class="stat-value">${hitsToday}</p>
+            </div>
+            <!--<div class="stat">
+                <p class="stat-title">Global Rank</p>
+                <p class="stat-value">#${globalRank}</p>
+            </div>-->
+        </div>
+
+        <div id="repo-validation" class="repo-validation">
+            <img src="/static/images/github-mark-white.png" height="16">
+            <span>This path is a valid GitHub repo!</span>
+            <a href="https://github.com/${path}">View on GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        async function checkGitHubApi() {
+            try {
+                const response = await fetch("https://api.github.com/repos/${path}");
+
+                if (response.status === 200) {
+                    document.getElementById("repo-validation").style.display = "block";
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        checkGitHubApi();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="luke@glitch.je">
+    <meta name="description" content="The simplest way to track the number of people viewing your GitHub projects!">
+
+    <title>Hit Counter</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+    <link rel="stylesheet" href="/static/css/color-picker.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="header-section">
+        <h1 class="title">Hit Counter</h1>
+        <p class="subtitle">The simplest way to track the number of people viewing your GitHub projects!</p>
+
+        <div class="donate-wrapper">
+            <a href="https://www.buymeacoffee.com/lukeeey" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;" ></a>
+            <iframe src="https://github.com/sponsors/lukeeey/button" title="Sponsor lukeeey" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
+        </div>
+    </div>
+
+    <div class="create-section">
+        <div class="create-panel">
+            <div class="url-container">
+                <label for="url">Repo Details</label>
+                <div class="options-row">
+                    <div class="input-container style editable">
+                        <label for="username">GitHub Username</label>
+                        <input id="username" name="username" type="text">
+                    </div>
+                    <div class="input-container label editable">
+                        <label for="repo">GitHub Repo</label>
+                        <input id="repo" name="repo" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="options-section">
+                <label>Options</label>
+                <p>Customize the style of your badge</p>
+
+                <div id="preview-badge" class="preview-badge"></div>
+            </div>
+            <div class="options-row">
+                <div class="input-container style editable">
+                    <label for="style">Style</label>
+                    <select id="style">
+                        <option value="flat" selected>Flat</option>
+                    </select>
+                </div>
+                <div class="input-container label editable">
+                    <label for="label">Label</label>
+                    <input id="label" name="label" type="text" placeholder="hits" value="hits">
+                </div>
+            </div>
+            <div class="options-row">
+                <div class="input-container color label-color editable">
+                    <label for="label-color">Label Colour</label>
+                    <input id="label-color" name="label-color" type="text" placeholder="#555555" value="#555555">
+                </div>
+                <div class="input-container color count-color editable">
+                    <label for="count-color">Count Colour</label>
+                    <input id="count-color" name="count-color" type="text" placeholder="#44cc11" value="#44cc11">
+                </div>
+            </div>
+
+            <div id="preview-container" class="preview-container">
+                <p>Markdown</p>
+                <div id="markdown-container" class="preview-code"></div>
+            </div>
+
+            <button id="generate-btn" class="generate-btn">Generate</button>
+        </div>
+    </div>
+
+    <div class="realtime-section">
+        <div>
+            <h2 class="realtime-title">Realtime Updates</h2>
+            <p class="realtime-subtitle">See hits in realtime as they come in!</p>
+
+            <div id="realtime-loading">Loading...</div>
+
+            <div id="realtime-container"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="https://github.com/lukeeey/hitcount">View on GitHub <img src="/static/images/github-mark.png" height="16"></a>
+    </div>
+
+    <script type="text/javascript" src="/static/js/color-picker.min.js"></script>
+    <script type="text/javascript" src="/static/js/script.js"></script>
+</body>
+
+</html>
