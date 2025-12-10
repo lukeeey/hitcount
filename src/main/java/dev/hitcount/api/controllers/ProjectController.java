@@ -64,7 +64,7 @@ public class ProjectController {
 
         root.addProperty("color", svg.getLabelColor());
         root.addProperty("label", svg.getLabel());
-        root.addProperty("message", hitCount);
+        root.addProperty("message", String.valueOf(hitCount));
         root.addProperty("schemaVersion", 1);
         root.addProperty("style", "flat");
 
