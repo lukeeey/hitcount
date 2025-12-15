@@ -48,6 +48,10 @@ const makeSvg = (styleValue, labelValue, labelColorValue, countColorValue) => {
         return width;
     };
 
+    if (styleValue === "pixel") {
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>`;
+    }
+
     const labelWidth = measureText(labelValue) + 10; 
     const countWidth = measureText(countValue) + 20; 
     const totalWidth = labelWidth + countWidth;
@@ -87,6 +91,7 @@ function generateBadge() {
     const labelColorElement = document.getElementById("label-color");
     const countColorElement = document.getElementById("count-color");
     const labelElement = document.getElementById("label");
+    const styleElement = document.getElementById("style");
     const markdownContainer = document.getElementById("markdown-container");
     const htmlContainer = document.getElementById("html-container");
     const previewContainer = document.getElementById("preview-container");
@@ -106,12 +111,17 @@ function generateBadge() {
         return;
     }
 
-    const svgUrl = new URL(`https://hitcount.dev/p/${usernameElement.value}/${repoElement.value}`);
+    const baseUrl = `https://hitcount.dev/p/${usernameElement.value}/${repoElement.value}`;
+    const svgUrl = new URL(baseUrl);
 
     if (svgUrl.pathname === "/" || svgUrl.pathname === "") {
         errorContainer.style.display = "block";
         errorContainer.innerHTML = "Invalid URL";
         return;
+    }
+    // Flat is default style so we don't need to include it in the url
+    if (styleElement.value !== "flat") {
+        svgUrl.searchParams.append("style", styleElement.value);
     }
     if (labelElement.value !== labelElement.getAttribute("placeholder")) {
         svgUrl.searchParams.append("label", labelElement.value);
@@ -123,9 +133,11 @@ function generateBadge() {
         svgUrl.searchParams.append("countColor", countColorElement.value.substring(1));
     }
 
+    const svgHref = svgUrl.origin + svgUrl.pathname + ".svg" + svgUrl.search;
+
     previewContainer.style.display = "block";
-    markdownContainer.innerHTML = `[![Hits](${svgUrl.href}.svg)](${svgUrl.href})`;
-    htmlContainer.textContent = `<img src="${svgUrl.href}.svg" alt="Hit Counter">`;
+    markdownContainer.innerHTML = `[![Hits](${svgHref})](${baseUrl})`;
+    htmlContainer.textContent = `<img src="${svgHref}" alt="Hit Counter">`;
 
     registerUrlType(`${usernameElement.value}/${repoElement.value}`);
 }
@@ -178,6 +190,7 @@ function replaceWithColorBox(source) {
 }
 
 document.getElementById("label").oninput = updateBadge;
+document.getElementById("style").onchange = updateBadge;
 document.getElementById("generate-btn").onclick = generateBadge;
 
 replaceWithColorBox(document.getElementById("label-color"));

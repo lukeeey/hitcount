@@ -29,7 +29,7 @@ public class SvgUtils {
             }
         }
         if ((style = ctx.queryParam("style")) != null) {
-            if (style.equalsIgnoreCase("flat")) {
+            if (style.equalsIgnoreCase("flat") || style.equalsIgnoreCase("pixel")) {
                 svg.style(style);
             }
         }

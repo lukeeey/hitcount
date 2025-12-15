@@ -19,6 +19,10 @@ public class SvgElement {
     private int count;
 
     public String create() {
+        if (style.equalsIgnoreCase("pixel")) {
+            return "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1\" height=\"1\"></svg>";
+        }
+
         int labelWidth = measureText(label, 11) + 10;
         int countWidth = measureText(String.valueOf(count), 11) + 20;
         int totalWidth = labelWidth + countWidth;
