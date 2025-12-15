@@ -2,11 +2,18 @@ package dev.hitcount.api.database;
 
 import com.zaxxer.hikari.HikariDataSource;
 import dev.hitcount.api.exceptions.GenericServerErrorException;
+import dev.hitcount.api.models.Hit;
 import dev.hitcount.api.models.PathData;
 import dev.hitcount.api.models.PathType;
 import dev.hitcount.api.models.UrlType;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MySQLConnection {
     private HikariDataSource dataSource = new HikariDataSource();
@@ -151,4 +158,62 @@ public class MySQLConnection {
         }
     }
 
+    public List<Hit> getRecentHits(String path, int limit) {
+        try (Connection connection = dataSource.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement("SELECT createdAt, pathType FROM hits WHERE path = ? ORDER BY createdAt DESC LIMIT ?");
+            stmt.setString(1, path);
+            stmt.setInt(2, limit);
+
+            try (ResultSet result = stmt.executeQuery()) {
+                List<Hit> hits = new ArrayList<>();
+
+                while (result.next()) {
+                    hits.add(new Hit(
+                            result.getString("createdAt"),
+                            formatTimeAgo(result.getString("createdAt")),
+                            PathType.from(result.getInt("pathType"))
+                    ));
+                }
+                return hits;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new GenericServerErrorException("Failed to connect to the database");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    private String formatTimeAgo(String createdAtStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime createdAt = LocalDateTime.parse(createdAtStr, formatter);
+        LocalDateTime now = LocalDateTime.now();
+
+        long seconds = ChronoUnit.SECONDS.between(createdAt, now);
+        long minutes = ChronoUnit.MINUTES.between(createdAt, now);
+        long hours = ChronoUnit.HOURS.between(createdAt, now);
+        long days = ChronoUnit.DAYS.between(createdAt, now);
+        long weeks = days / 7;
+
+        Period period = Period.between(createdAt.toLocalDate(), now.toLocalDate());
+        int months = period.getMonths() + period.getYears() * 12;
+        int years = period.getYears();
+
+        if (seconds < 60) {
+            return seconds + " seconds ago";
+        } else if (minutes < 60) {
+            return minutes + " minutes ago";
+        } else if (hours < 24) {
+            return hours + " hours ago";
+        } else if (days < 7) {
+            return days + " days ago";
+        } else if (weeks < 4) {
+            return weeks + " week" + (weeks > 1 ? "s" : "") + " ago";
+        } else if (months < 12) {
+            return months + " month" + (months > 1 ? "s" : "") + " ago";
+        } else {
+            return years + " year" + (years > 1 ? "s" : "") + " ago";
+        }
+    }
 }

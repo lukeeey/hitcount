@@ -94,7 +94,9 @@ body {
 
 @media screen and (max-width: 768px) {
     .repo-validation {
+        display: flex !important;
         flex-wrap: wrap;
+        gap: 3px;
     }
 
     .repo-validation > a {
@@ -158,4 +160,35 @@ body {
     .donate-wrapper .gh-sponsors {
         display: none;
     }
+}
+
+.recent-hits-title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.hit-path-desc {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.hit-time-ago {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hit-date {
+    font-size: 14px;
+}
+
+.recent-hits {
+    border: 1px solid #e6e6e6;
+    padding: 10px 25px;
+    min-width: 150px;
+    width: fit-content;
+    border-radius: 15px;
+    overflow-y: scroll;
+    max-height: 300px;
+    list-style: none;
+    margin-bottom: 30px;
 }

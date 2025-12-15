@@ -2,6 +2,7 @@ package dev.hitcount.api.controllers;
 
 import com.google.gson.JsonObject;
 import dev.hitcount.api.SocketHandler;
+import dev.hitcount.api.models.Hit;
 import dev.hitcount.api.svg.SvgElement;
 import dev.hitcount.api.database.MySQLConnection;
 import dev.hitcount.api.models.PathData;
@@ -12,6 +13,7 @@ import io.javalin.http.Context;
 import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -28,11 +30,14 @@ public class ProjectController {
             return;
         }
 
+        List<Hit> recentHits = connection.getRecentHits(path, 50);
+
         Map<String, Object> params = new HashMap<>();
         params.put("path", path);
         params.put("totalHits", data.getTotalHits());
         params.put("hitsThisMonth", data.getHitsThisMonth());
         params.put("hitsToday", data.getHitsToday());
+        params.put("recentHits", recentHits);
 //        params.put("globalRank", data.getGlobalRank());
 //        params.put("urlType", data.getUrlType());
 
