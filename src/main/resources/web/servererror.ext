@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="/static/css/style.css">
 
     <style>
+        <#include "static/css/style.css">
+    </style>
+
+    <style>
         .create-btn {
             text-decoration: none;
             color: black;
