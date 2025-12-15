@@ -33,8 +33,8 @@ public class ProjectController {
         params.put("totalHits", data.getTotalHits());
         params.put("hitsThisMonth", data.getHitsThisMonth());
         params.put("hitsToday", data.getHitsToday());
-        params.put("globalRank", data.getGlobalRank());
-        params.put("urlType", data.getUrlType());
+//        params.put("globalRank", data.getGlobalRank());
+//        params.put("urlType", data.getUrlType());
 
         ctx.render("/web/project.ext", params);
     }
