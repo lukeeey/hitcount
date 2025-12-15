@@ -108,7 +108,6 @@ public class MySQLConnection {
                             result.getInt("totalHits"),
                             result.getInt("hitsThisMonth"),
                             result.getInt("hitsToday"),
-                            420,
                             UrlType.fromId(result.getInt("urlType"))
                     );
                 }
