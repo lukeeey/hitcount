@@ -88,23 +88,29 @@ function generateBadge() {
     const countColorElement = document.getElementById("count-color");
     const labelElement = document.getElementById("label");
     const markdownContainer = document.getElementById("markdown-container");
+    const htmlContainer = document.getElementById("html-container");
     const previewContainer = document.getElementById("preview-container");
+    const errorContainer = document.getElementById("error-container");
 
-    previewContainer.style.display = "block";
+    previewContainer.style.display = "none";
+    errorContainer.style.display = "none";
 
     if (usernameElement.value === "" || usernameElement.value.length > 40) {
-        markdownContainer.innerHTML = "Invalid username";
+        errorContainer.style.display = "block";
+        errorContainer.innerHTML = "Invalid username";
         return;
     }
     if (repoElement.value === "" || repoElement.value.length > 150) {
-        markdownContainer.innerHTML = "Invalid repo name";
+        errorContainer.style.display = "block";
+        errorContainer.innerHTML = "Invalid repo name";
         return;
     }
 
     const svgUrl = new URL(`https://hitcount.dev/p/${usernameElement.value}/${repoElement.value}`);
 
     if (svgUrl.pathname === "/" || svgUrl.pathname === "") {
-        markdownContainer.innerHTML = "Invalid URL";
+        errorContainer.style.display = "block";
+        errorContainer.innerHTML = "Invalid URL";
         return;
     }
     if (labelElement.value !== labelElement.getAttribute("placeholder")) {
@@ -117,7 +123,9 @@ function generateBadge() {
         svgUrl.searchParams.append("countColor", countColorElement.value.substring(1));
     }
 
+    previewContainer.style.display = "block";
     markdownContainer.innerHTML = `[![Hits](${svgUrl.href}.svg)](${svgUrl.href})`;
+    htmlContainer.textContent = `<img src="${svgUrl.href}.svg" alt="Hit Counter">`;
 
     registerUrlType(`${usernameElement.value}/${repoElement.value}`);
 }

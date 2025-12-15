@@ -48,7 +48,8 @@ body {
 }
 
 .create-section {
-    height: 500px;
+    min-height: 350px;
+    padding-bottom: 50px;
     background: rgb(31 41 55);
     display: flex;
     justify-content: center;
@@ -68,10 +69,6 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    .create-section {
-        height: 600px;
-    }
-
     .create-panel {
         width: 90%;
         padding: 30px 20px;
@@ -186,6 +183,13 @@ input, select {
     color: white;
     padding: 15px;
     overflow: scroll;
+}
+
+#error-container {
+    display: none;
+    border: 1px solid red;
+    border-radius: 8px;
+    padding: 5px 15px;
 }
 
 .realtime-section {

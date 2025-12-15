@@ -77,9 +77,14 @@
                 </div>
             </div>
 
+            <div id="error-container"></div>
+
             <div id="preview-container" class="preview-container">
                 <p>Markdown</p>
                 <div id="markdown-container" class="preview-code"></div>
+
+                <p style="margin-top:15px">HTML</p>
+                <div id="html-container" class="preview-code"></div>
             </div>
 
             <button id="generate-btn" class="generate-btn">Generate</button>
