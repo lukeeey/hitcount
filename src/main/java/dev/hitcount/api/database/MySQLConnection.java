@@ -2,10 +2,7 @@ package dev.hitcount.api.database;
 
 import com.zaxxer.hikari.HikariDataSource;
 import dev.hitcount.api.exceptions.GenericServerErrorException;
-import dev.hitcount.api.models.Hit;
-import dev.hitcount.api.models.PathData;
-import dev.hitcount.api.models.PathType;
-import dev.hitcount.api.models.UrlType;
+import dev.hitcount.api.models.*;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -181,6 +178,58 @@ public class MySQLConnection {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return new ArrayList<>();
+        }
+    }
+
+    public List<LeaderboardItem> getLeaderboard() {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT path, COUNT(*) AS hitCount " +
+                            "FROM hits " +
+                            "GROUP BY path " +
+                            "ORDER BY hitCount DESC " +
+                            "LIMIT 10"
+            );
+
+            try (ResultSet result = stmt.executeQuery()) {
+                List<LeaderboardItem> topHits = new ArrayList<>();
+
+                while (result.next()) {
+                    topHits.add(new LeaderboardItem(
+                            result.getString("path"),
+                            result.getInt("hitCount")
+                    ));
+                }
+
+                return topHits;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new GenericServerErrorException("Failed to connect to the database");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    public int getTotalDistinctPaths() {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT COUNT(DISTINCT path) AS total FROM hits"
+            );
+
+            try (ResultSet result = stmt.executeQuery()) {
+                if (result.next()) {
+                    return result.getInt("total");
+                }
+                return 0;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new GenericServerErrorException("Failed to connect to the database");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return 0;
         }
     }
 

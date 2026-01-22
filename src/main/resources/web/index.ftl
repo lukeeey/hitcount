@@ -15,11 +15,22 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
 
     <style>
+        <#include "static/css/shared.css">
         <#include "static/css/style.css">
     </style>
     <style>
         <#include "static/css/color-picker.min.css">
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJVLW2RSW1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-KJVLW2RSW1');
+    </script>
 </head>
 
 <body>
@@ -77,6 +88,9 @@
                     <input id="count-color" name="count-color" type="text" placeholder="#44cc11" value="#44cc11">
                 </div>
             </div>
+            <div class="more-styling-text">
+                For more styling options, use <a href="https://github.com/lukeeey/hitcount/blob/master/README.md#shieldsio-badge" target="_blank">the shields.io endpoint</a>
+            </div>
 
             <div id="error-container"></div>
 
@@ -103,9 +117,7 @@
         </div>
     </div>
 
-    <div class="footer">
-        <a href="https://github.com/lukeeey/hitcount">View on GitHub <img src="/static/images/github-mark.png" height="16" alt="GitHub Logo"></a>
-    </div>
+    <#include "partials/footer.ftl">
 
     <script type="text/javascript" src="/static/js/color-picker.min.js"></script>
     <script type="text/javascript" src="/static/js/script.js"></script>

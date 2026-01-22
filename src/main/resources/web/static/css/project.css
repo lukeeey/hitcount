@@ -94,7 +94,6 @@ body {
 
 @media screen and (max-width: 768px) {
     .repo-validation {
-        display: flex !important;
         flex-wrap: wrap;
         gap: 3px;
     }
@@ -192,3 +191,39 @@ body {
     list-style: none;
     margin-bottom: 30px;
 }
+
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.leaderboard-item {
+    display: flex;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.leaderboard-item-hits {
+    display: inline;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.leaderboard-item-path {
+    display: flex;
+    align-items: center;
+}
+
+.leaderboard-title {
+    font-size: 45px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .leaderboard-title {
+        font-size: 30px;
+    }

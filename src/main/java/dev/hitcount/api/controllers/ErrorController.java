@@ -18,7 +18,7 @@ public class ErrorController {
             ctx.json(new ErrorResponse("Not found"));
             return;
         }
-        ctx.render("/web/notfound.ext");
+        ctx.render("/web/notfound.ftl");
     }
 
     public void handleServerError(Context ctx, Throwable ex) {
@@ -36,7 +36,7 @@ public class ErrorController {
             ctx.json(new ErrorResponse(ex != null ? ex.getMessage() : "An unknown error has occurred"));
             return;
         }
-        ctx.render("/web/servererror.ext");
+        ctx.render("/web/servererror.ftl");
     }
 
     private void setCacheHeaders(Context ctx) {

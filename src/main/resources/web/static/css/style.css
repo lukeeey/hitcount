@@ -240,16 +240,6 @@ input, select {
     font-weight: bold;
 }
 
-.footer {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.footer a {
-    text-decoration: none;
-    color: #333;
-}
-
 .color-picker {
     border: 1px solid;
     border-color: var(--stroke-color-picker__controls);
@@ -261,4 +251,9 @@ input, select {
 
 .color-picker__dialog {
     margin-top: -1px;
+}
+
+.more-styling-text {
+    font-size: 14px;
+    color: #6c757d;
 }

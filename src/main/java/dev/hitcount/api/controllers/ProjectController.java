@@ -2,12 +2,9 @@ package dev.hitcount.api.controllers;
 
 import com.google.gson.JsonObject;
 import dev.hitcount.api.SocketHandler;
-import dev.hitcount.api.models.Hit;
+import dev.hitcount.api.models.*;
 import dev.hitcount.api.svg.SvgElement;
 import dev.hitcount.api.database.MySQLConnection;
-import dev.hitcount.api.models.PathData;
-import dev.hitcount.api.models.PathType;
-import dev.hitcount.api.models.ProjectData;
 import dev.hitcount.api.svg.SvgUtils;
 import io.javalin.http.Context;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +38,14 @@ public class ProjectController {
 //        params.put("globalRank", data.getGlobalRank());
 //        params.put("urlType", data.getUrlType());
 
-        ctx.render("/web/project.ext", params);
+        ctx.render("/web/project.ftl", params);
+    }
+
+    public void handleGetLeaderboardBrowser(Context ctx) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("items", connection.getLeaderboard());
+        params.put("totalProjects", connection.getTotalDistinctPaths());
+        ctx.render("/web/leaderboard.ftl", params);
     }
 
     public void handleGetJson(Context ctx) {

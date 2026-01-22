@@ -15,8 +15,19 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
 
     <style>
+        <#include "static/css/shared.css">
         <#include "static/css/project.css">
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJVLW2RSW1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-KJVLW2RSW1');
+    </script>
 </head>
 
 <body>
@@ -79,13 +90,15 @@
         </#if>
     </div>
 
+    <#include "partials/footer.ftl">
+
     <script>
         async function checkGitHubApi() {
             try {
                 const response = await fetch("https://api.github.com/repos/${path}");
 
                 if (response.status === 200) {
-                    document.getElementById("repo-validation").style.display = "block";
+                    document.getElementById("repo-validation").style.display = "flex";
                 }
             } catch (e) {
                 console.error(e);

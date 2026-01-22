@@ -70,6 +70,7 @@ public class Server {
         app.get("/p/*.shields.json", projectController::handleGetShieldsJson);
         app.get("/p/*.json", projectController::handleGetJson);
         app.get("/p/*", projectController::handleGetBrowser);
+        app.get("/leaderboard", projectController::handleGetLeaderboardBrowser);
         app.ws("/socket", socketHandler::handle);
         app.post("/registerPathData", ctx -> {
             RegisterPathData data = ctx.bodyAsClass(RegisterPathData.class);
